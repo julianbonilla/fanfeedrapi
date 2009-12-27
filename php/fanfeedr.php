@@ -14,9 +14,12 @@
  * }
  */
 class FanFeedr{
-    public function __construct($tier, $apiKey){
-        $this->tier=$tier;
+    private $tier;
+    private $apiKey;
+    
+    public function __construct($apiKey, $tier='basic'){
         $this->apiKey=$apiKey;
+        $this->tier=$tier;
     }
     private function fetch($method, $params){
         $params['format'] = 'json';
