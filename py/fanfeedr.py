@@ -21,8 +21,8 @@ class FanFeedr(object):
         @param string tier (Optional) The API tier you have access to (basic, daily, gold, or platinum).
         @param string gateway_url (Optional) Simple placeholder for supporting multiple gateways (ie for staging).
         ''''
-        self.tier = tier
         self.api_key = api_key
+        self.tier = tier
         self.gateway_url = gateway_url
 
     def __fetch(self, service, method, params=None):
@@ -44,7 +44,7 @@ class FanFeedr(object):
         contents = c.read()
         return json.read(contents)
 
-    def suggest(self, q){
+    def suggest(self, q):
         '''
         This call provides typeahead suggestion for entity resource lookups, ie for the
         query red you recieve path and resource info for the Red Sox, Chris Redman, and
@@ -55,9 +55,9 @@ class FanFeedr(object):
          params = {
             'q' : q
         }
-        return self.__fetch('basic', 'suggest', params);
+        return self.__fetch('basic', 'suggest', params)
 
-    def all_scores(self, start='0',rows='20'){
+    def all_scores(self, start='0',rows='20'):
         '''
         A news feed of all the most recent scores for all teams.
         Example: 
@@ -67,9 +67,9 @@ class FanFeedr(object):
             'start' : start,
             'rows' : rows
         }
-        return self.__fetch('basic', 'all_scores', params);
+        return self.__fetch('basic', 'all_scores', params)
 
-    def scores(self, resource,start='0',rows='20'){
+    def scores(self, resource,start='0',rows='20'):
         '''
         Call to return the scores for a given league resource.
         Example: 
@@ -80,9 +80,9 @@ class FanFeedr(object):
             'start' : start,
             'rows' : rows
         }
-        return self.__fetch('basic', 'scores', params);
+        return self.__fetch('basic', 'scores', params)
 
-    def geo_feed(self, start='0',rows='20',lat='',long=''){
+    def geo_feed(self, start='0',rows='20',lat='',long=''):
         '''
         Provides ta news feed based on teams found near a given geo location. This is
         tparticulary useful if you have access to geolocation data from ip tlookups or
@@ -96,9 +96,9 @@ class FanFeedr(object):
             'lat' : lat,
             'long' : long
         }
-        return self.__fetch('basic', 'geo_feed', params);
+        return self.__fetch('basic', 'geo_feed', params)
 
-    def search(self, q,start='0',rows='20',filter='search',date='all-time',content_type='all'){
+    def search(self, q,start='0',rows='20',filter='search',date='all-time',content_type='all'):
         '''
         Provides a news feed for a given query string.
         Example: 
@@ -112,9 +112,9 @@ class FanFeedr(object):
             'date' : date,
             'content_type' : content_type
         }
-        return self.__fetch('basic', 'search', params);
+        return self.__fetch('basic', 'search', params)
 
-    def article(self, resource){
+    def article(self, resource):
         '''
         Provides formatted article text for a given article resource
         Example: 
@@ -123,9 +123,9 @@ class FanFeedr(object):
          params = {
             'resource' : resource
         }
-        return self.__fetch('basic', 'article', params);
+        return self.__fetch('basic', 'article', params)
 
-    def recap(self, resource){
+    def recap(self, resource):
         '''
         Gets the recap of an event
         Example: 
@@ -134,9 +134,9 @@ class FanFeedr(object):
          params = {
             'resource' : resource
         }
-        return self.__fetch('basic', 'recap', params);
+        return self.__fetch('basic', 'recap', params)
 
-    def boxscore(self, resource){
+    def boxscore(self, resource):
         '''
         Gets the boxscore of an event
         Example: 
@@ -145,9 +145,9 @@ class FanFeedr(object):
          params = {
             'resource' : resource
         }
-        return self.__fetch('basic', 'boxscore', params);
+        return self.__fetch('basic', 'boxscore', params)
 
-    def schedule(self, resource){
+    def schedule(self, resource):
         '''
         Gets the schedule for a team resource.
         Example: 
@@ -156,9 +156,9 @@ class FanFeedr(object):
          params = {
             'resource' : resource
         }
-        return self.__fetch('basic', 'schedule', params);
+        return self.__fetch('basic', 'schedule', params)
 
-    def resource_feed(self, resource){
+    def resource_feed(self, resource):
         '''
         Gets a list of articles for a resource
         Example: 
@@ -167,4 +167,4 @@ class FanFeedr(object):
          params = {
             'resource' : resource
         }
-        return self.__fetch('basic', 'resource_feed', params);
+        return self.__fetch('basic', 'resource_feed', params)

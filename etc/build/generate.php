@@ -71,7 +71,7 @@ function generate_python($data){
                     $pString .= ",\n";
                 }
                 else{
-                    $out .= "){\n";
+                    $out .= "):\n";
                 }
                 $i++;
             }
@@ -88,10 +88,10 @@ function generate_python($data){
             $out .= "        '''\n";
             
             $out .= $pString;
-            $out .= "        return self.__fetch('basic', '".$method->method."', params);\n\n";
+            $out .= "        return self.__fetch('basic', '".$method->method."', params)\n\n";
         }
         else{
-            $out .= "        return self.__fetch('basic', '".$method->method."');\n\n";
+            $out .= "        return self.__fetch('basic', '".$method->method."')\n\n";
         }
     }
     return $out;
