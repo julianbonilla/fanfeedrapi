@@ -1,46 +1,19 @@
-<?php
-/**
- * Basic class for interacting with the FanFeedr API.
- * @author Lucas Hrabovsky <lucas@fanfeedr.com>
- * 
- * For more information, please see http://developer.fanfeedr.com
- * 
- * Example:
- * $fanfeedr = new FanFeedr('basic', '<your-basic-api-key>');
- * $search_results = $fanfeedr->search('steelers');
- * print "<h1>Steelers News</h1>";
- * foreach($search_results->docs as $result){
- *     print "<a href=\"".$result['article.link']."\">".$result['entity.name']."</a><br />";
- * }
- */
 class FanFeedr{
-    private $tier;
-    private $apiKey;
-    
     public function __construct($apiKey, $tier='basic'){
         $this->apiKey=$apiKey;
         $this->tier=$tier;
     }
-    private function fetch($method, $params){
+    private function fetch($method, $params=array()){
+        $url = 'http://api.fanfeedr.com/'.$this->tier.'/'.$method;
         $params['format'] = 'json';
         $params['appid'] = $this->apiKey;
-        $url = "http://api.fanfeedr.com/".$this->tier."/".$method."?".http_build_query($params, '', '&');
+        $url .= '?'.http_build_query($params);
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
+        $response_body = curl_exec($ch);
         $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        if (intval($status) != 200){
-            die("Error: $response");
-        }
-        $r = json_decode($response);
-        if($r->docs){
-            $clean = array();
-            foreach($r->docs as $docs){
-                $clean[] = get_object_vars($docs);
-            }
-            $r->docs = $clean;
-        }
-        return $r;
+        if (intval($status) != 200) die("Error: ");
+        return json_decode($response_body);
     }
     public function suggest($q){
         $params = array(
@@ -114,4 +87,3 @@ class FanFeedr{
         return $this->fetch('resource_feed', $params);
     }
 }
-?>

@@ -20,25 +20,25 @@ function generate_python($data){
     $out .= "import sys\n";
     $out .= "import json\n";
     $out .= "import urllib2\n";
-    $out .= "import urlib\n\n";
+    $out .= "import urllib\n\n";
     $out .= "class FanFeedr(object):\n";
     $out .= "    def __init__(self, api_key, tier='basic', gateway_url='http://api.fanfeedr.com/'):\n";
-    $out .= "        ''''\n";
+    $out .= "        '''\n";
     $out .= "        Basic constructor.\n";
     $out .= "        @param string api_key Your API key for the tier you are requesting to.\n";
     $out .= "        @param string tier (Optional) The API tier you have access to (basic, daily, gold, or platinum).\n";
     $out .= "        @param string gateway_url (Optional) Simple placeholder for supporting multiple gateways (ie for staging).\n";
-    $out .= "        ''''\n";
+    $out .= "        '''\n";
     $out .= "        self.tier = tier\n";
     $out .= "        self.api_key = api_key\n";
     $out .= "        self.gateway_url = gateway_url\n\n";
     $out .= "    def __fetch(self, service, method, params=None):\n";
-    $out .= "        ''''\n";
+    $out .= "        '''\n";
     $out .= "        Private method for fetching from HTTP and decoding JSON.\n";
     $out .= "        @param string service URL namespace for service (ie basic, gaming, user, etc).  Placeholder for now as all are basic.\n";
     $out .= "        @param string method The API method to call.\n";
     $out .= "        @param object params (Optional) Additional params to send along with the request.\n";
-    $out .= "        ''''\n";
+    $out .= "        '''\n";
     $out .= "        param_string = ''\n";
     $out .= "        if params!=None:\n";
     $out .= "            param_string = urllib.urlencode(params)\n";
@@ -147,5 +147,12 @@ function generate_php($data){
     
     return $out;
 }
+
+$data = json_decode(file_get_contents('api.json'));
+
+$python = generate_python($data);
+$php = generate_php($data);
+file_put_contents('../../php/fanfeedr.php', $php);
+file_put_contents('../../py/fanfeedr.py', $python);
 
 ?>

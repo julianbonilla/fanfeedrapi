@@ -11,27 +11,27 @@ import os
 import sys
 import json
 import urllib2
-import urlib
+import urllib
 
 class FanFeedr(object):
     def __init__(self, api_key, tier='basic', gateway_url='http://api.fanfeedr.com/'):
-        ''''
+        '''
         Basic constructor.
         @param string api_key Your API key for the tier you are requesting to.
         @param string tier (Optional) The API tier you have access to (basic, daily, gold, or platinum).
         @param string gateway_url (Optional) Simple placeholder for supporting multiple gateways (ie for staging).
-        ''''
-        self.api_key = api_key
+        '''
         self.tier = tier
+        self.api_key = api_key
         self.gateway_url = gateway_url
 
     def __fetch(self, service, method, params=None):
-        ''''
+        '''
         Private method for fetching from HTTP and decoding JSON.
         @param string service URL namespace for service (ie basic, gaming, user, etc).  Placeholder for now as all are basic.
         @param string method The API method to call.
         @param object params (Optional) Additional params to send along with the request.
-        ''''
+        '''
         param_string = ''
         if params!=None:
             param_string = urllib.urlencode(params)
@@ -168,3 +168,4 @@ class FanFeedr(object):
             'resource' : resource
         }
         return self.__fetch('basic', 'resource_feed', params)
+
